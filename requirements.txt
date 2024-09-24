@@ -1,0 +1,9 @@
+torch
+numpy
+peft
+bitsandbytes
+wandb
+datasets
+trl
+loguru
+accelerate

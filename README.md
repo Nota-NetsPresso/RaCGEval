@@ -1,6 +1,6 @@
 # RaCAV-eval
 
-This repository contain the Retrieval-augmented Code generation with Answerability Verification (RaCAV) evaluation framework. Specifically, this repo includes benchmak dataset, pre-trained verification models checkpoints, inference and training script.
+This repository contain the Retrieval-augmented Code generation with Answerability Verification (RaCAV) evaluation framework. Specifically, this repo includes benchmak dataset, pre-trained verification models checkpoints, inference and evaluation script.
 
 ## RaCAV dataset
 RaCAV dataset is designed to evaluate answerability verification task for code generation task with RAG scenario. See the [paper]() for more details.
@@ -21,11 +21,9 @@ RaCAV dataset is designed to evaluate answerability verification task for code g
 ```
 
 ### Annotation Criteria
-
 We define annotation criteria for determining whether a user query can be answered based on a specified API database. User queries usually consist of multiple requests. If all of the requests can be resolved using the library's APIs, the query is annotated as **answerable**. If only some of the requests can be resolved, it is annotated as **partially answerable**. If none of the requests can be resolved, it is annotated as **unanswerable**.
 
 ### Selected Libraries
-
 We selected *private libraries* that code language models have not been trained on. These *private libraries* ensure that the evaluation of answerability verification is independent of the prior knowledge of the code language models. Since code language models lack prior knowledge of the private libraries, they should heavily rely on retrieved APIs to generate responses for user queries. RaCAV includes the following 4 libraries:
 
 - [**NetsPressoEval**](https://nota-netspresso.github.io/PyNetsPresso/description.html): Library for training, compressing, deploying, and benchmarking neural models on various hardware.
@@ -36,7 +34,6 @@ We selected *private libraries* that code language models have not been trained 
 Each library consists of a user's query, gold APIs, canonical solution, and test code. They are designed for evaluating LLM's code generation quality given the user's request.
 
 ### Building unanswerable/partially answerable samples
-
 Unanswerable and partially answerable samples correspond to cases where all or some of the requests in the user query cannot be resolved using the retrieved APIs. Therefore, we convert the answerable samples to unanswerable and partially answerable samples using the following operations:
 
 - Substitute gold APIs
@@ -62,7 +59,7 @@ pip install -r requirements.txt
 ```
 
 ## Pre-trained models
-Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-adapter-RaCAV](https://huggingface.co/nota-ai/llama3-8b-adapter-RaCAV), and [gemma-7b-adapter-RaCAV](https://huggingface.co/nota-ai/gemma-7b-adapter-RaCAV)
+Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-adapter-RaCAV](https://huggingface.co/nota-ai/llama3-8b-adapter-RaCAV), and [gemma-7b-adapter-RaCAV](https://huggingface.co/nota-ai/gemma-7b-adapter-RaCAV).
 
 ## Inference
 Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and [Gemma](https://huggingface.co/google/gemma-1.1-2b-it) are required.
@@ -70,16 +67,6 @@ You can get a response using `infer.py` with the example input in the code.
 
 ```bash
 python infer.py --model_name {gemma-7b, llama3-8b} --token {HF_token}
-```
-
-## Train
-```bash
-export ACCELERATE_USE_FSDP=1 
-export FSDP_CPU_RAM_EFFICIENT_LOADING=1 
-export NCCL_IB_DISABLE=1 
-
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 accelerate launch train.py \
-    --config fsdp_config.yaml
 ```
 
 ## Benchmark

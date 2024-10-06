@@ -1,6 +1,6 @@
 # RaCAV-eval
 
-This repository contain the Retrieval-augmented Code generation with Answerability Verification (RaCAV) evaluation framework. Specifically, this repo includes benchmak dataset, pre-trained verification models checkpoints, inference and evaluation script.
+This repository contain the Retrieval-augmented Code Generability (RaCG) evaluation framework. Specifically, this repo includes benchmak dataset, pre-trained verification models checkpoints, inference and evaluation script.
 
 ## RaCAV dataset
 RaCAV dataset is designed to evaluate answerability verification task for code generation task with RAG scenario. See the [paper]() for more details.
@@ -71,7 +71,7 @@ python infer.py --model_name {gemma-7b, llama3-8b} --token {HF_token}
 
 ## Benchmark
 
-|            | Accurary w/o shot | Accurary w/ 1 shot | Accurary w/ 2 shots |
+|            | Zero-shot | + Fine-tuning (QLoRA) | + In-context learning (3way-1shot) |
 |------------|-------------------|--------------------|---------------------|
-| Llama 3 8B | 0.365             | 0.545              | 0.546               |
-| Gemma 7B   | 0.480             | 0.562              | 0.555               |
+| Llama 3 8B | 33.0             | 36.5             | 53.7               |
+| Gemma 7B   | 36.9             | 46.7             | 55.8               |

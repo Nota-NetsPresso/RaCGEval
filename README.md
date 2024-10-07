@@ -68,15 +68,26 @@ Access to gated HF repository(ex.[Llama 3](https://huggingface.co/meta-llama/Met
 python eval.py \
     --model_path {directory containing lora adapter or model name} \
     --device {device to use} \
-    --shots {zero, one, two}
+    --shots {zero, one, two} \
+    {--use_adapter}
 ```
 
 ### Example
+#### Use HF model
 ```bash
-python evaluation.py \
+python eval.py \
     --model_path google/gemma-1.1-7b-it \
     --device cuda:0 \
     --shots zero
+```
+
+#### Use adapter
+```bash
+python eval.py \
+    --model_path nota-ai/llama3-8b-adapter-RaCG \
+    --device cuda:0 \
+    --shots zero \
+    --use_adapter
 ```
 
 ## Benchmark

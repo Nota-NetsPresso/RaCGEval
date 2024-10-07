@@ -28,10 +28,6 @@ def parse_args(args):
 
     args = parser.parse_args(args)
 
-    adpater_path = os.path.join(args.model_path, "adapter_config.json")
-    if os.path.isfile(adpater_path):
-        args.use_adapter = True
-
     return args
 
 

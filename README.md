@@ -44,7 +44,7 @@ Unanswerable and partially answerable samples correspond to cases where all or s
 The number of samples in the RaCG dataset for each library and answerability type is shown in the table below. Every generated query is cross-checked by the 4 annotators.
 
 | Libraries | #Answerable | #Partially answerable | #Unanswerable |
-|:---:|:---:|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|:---:|
 | NetsPressoEval | 70 | 49 | 121 |
 | TorchDataEval | 50 | 44 | 83 |
 | BeatNumEval | 85 | 89 | 148 |

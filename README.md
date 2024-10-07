@@ -62,7 +62,7 @@ pip install -r requirements.txt
 Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-adapter-RaCG](https://huggingface.co/nota-ai/llama3-8b-adapter-RaCG), and [gemma-7b-adapter-RaCG](https://huggingface.co/nota-ai/gemma-7b-adapter-RaCG).
 
 ## Evaluation
-Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and [Gemma](https://huggingface.co/google/gemma-1.1-2b-it) are may required.
+Access to gated HF repository(ex.[Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct), [Gemma](https://huggingface.co/google/gemma-1.1-2b-it)) is may required.
 
 ```bash
 python eval.py \

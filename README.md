@@ -61,15 +61,9 @@ pip install -r requirements.txt
 ## Pre-trained models
 Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-adapter-RaCG](https://huggingface.co/nota-ai/llama3-8b-adapter-RaCG), and [gemma-7b-adapter-RaCG](https://huggingface.co/nota-ai/gemma-7b-adapter-RaCG).
 
-## Inference
-Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and [Gemma](https://huggingface.co/google/gemma-1.1-2b-it) are required.
-You can get a response using `infer.py` with the example input in the code.
-
-```bash
-python infer.py --model_name {gemma-7b, llama3-8b} --token {HF_token}
-```
-
 ## Evaluation
+Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and [Gemma](https://huggingface.co/google/gemma-1.1-2b-it) are may required.
+
 ```bash
 python eval.py \
     --model_path {directory containing lora adapter or model name} \

@@ -65,13 +65,6 @@ Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-ad
 Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and [Gemma](https://huggingface.co/google/gemma-1.1-2b-it) are required.
 You can get a response using `infer.py` with the example input in the code.
 
-## Terms of use
-The dataset published in this repository was developed using several original datasets. Commercial use of any modifications or additions made from the original datasets is not allowed.
-
-However, commercial use of the original datasets is allowed, and if you wish to use the data for commercial purposes, you may refer to the original datasets.
-
-Original dataset (license) link :
-
 ```bash
 python infer.py --model_name {gemma-7b, llama3-8b} --token {HF_token}
 ```

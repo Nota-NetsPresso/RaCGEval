@@ -77,4 +77,4 @@ python infer.py --model_name {gemma-7b, llama3-8b} --token {HF_token}
 | Gemma 7B   | 36.9             | 46.7             | 55.8               |
 
 ## Terms of use
-The dataset published in this repository contains several original datasets ([license](https://github.com/microsoft/PyCodeGPT/blob/main/apicoder/APIRetriever/LICENSE)) including TorchDataEval, BeatNumEval, andMonkeyEval) and NetsPressoEval. Commercial use of any modifications or additions made from the original datasets is not allowed. 
+The dataset published in this repository contains several original datasets ([license](https://github.com/microsoft/PyCodeGPT/blob/main/apicoder/APIRetriever/LICENSE)) including TorchDataEval, BeatNumEval, and MonkeyEval. Commercial use of any modifications or additions made from the original datasets is not allowed. 

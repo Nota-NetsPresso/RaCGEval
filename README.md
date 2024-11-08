@@ -59,10 +59,11 @@ pip install -r requirements.txt
 ```
 
 ## Pre-trained models
-Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-adapter-RaCG](https://huggingface.co/nota-ai/llama3-8b-adapter-RaCG), and [gemma-7b-adapter-RaCG](https://huggingface.co/nota-ai/gemma-7b-adapter-RaCG).
+Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-adapter-RaCGEval](https://huggingface.co/nota-ai/llama3-8b-adapter-RaCGEval), and [gemma-7b-adapter-RaCGEval](https://huggingface.co/nota-ai/gemma-7b-adapter-RaCGEval).
 
-## Evaluation
-Access to gated HF repository(ex.[Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct), [Gemma](https://huggingface.co/google/gemma-1.1-2b-it)) is may required.
+## Inference
+Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and [Gemma](https://huggingface.co/google/gemma-1.1-7b-it) are required.
+You can get a response using `infer.py` with the example input in the code.
 
 ```bash
 python eval.py \
@@ -92,7 +93,10 @@ python eval.py \
 
 ## Benchmark
 
-|              | Zero-shot | + Fine-tuning (QLoRA) | + In-context learning (3way-1shot) |
-|--------------|------------------|------------------|--------------------|
-| Llama 3 8B   | 33.0             | 36.5             | 53.7               |
-| Gemma 1.1 7B | 36.9             | 46.7             | 55.8               |
+|            | Zero-shot | + Fine-tuning (QLoRA) | + In-context learning (3way-1shot) |
+|------------|-------------------|--------------------|---------------------|
+| Llama 3 8B | 33.0             | 36.5             | 53.7               |
+| Gemma 7B   | 36.9             | 46.7             | 55.8               |
+
+## Terms of use
+The dataset published in this repository contains several original datasets ([license](https://github.com/microsoft/PyCodeGPT/blob/main/apicoder/APIRetriever/LICENSE)) including TorchDataEval, BeatNumEval, and MonkeyEval. Commercial use of any modifications or additions made from the original datasets is not allowed. 

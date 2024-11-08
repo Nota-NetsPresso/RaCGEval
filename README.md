@@ -1,13 +1,13 @@
-# RaCAV-eval
+# RaCGEval
 
 This repository contain the Retrieval-augmented Code Generability (RaCG) evaluation framework. Specifically, this repo includes benchmak dataset, pre-trained verification models checkpoints, inference and evaluation script.
 
-## RaCAV dataset
-RaCAV dataset is designed to evaluate answerability verification task for code generation task with RAG scenario. See the [paper]() for more details.
+## RaCGEval dataset
+RaCGEval dataset is designed to evaluate answerability verification task for code generation task with RAG scenario. See the [paper]() for more details.
 
 ### Example
 ```
-"RaCAV/697": {
+"RaCGEval/697": {
     "query": "Can you guide me through compressing my custom model, retraining it, and measuring its latency?",
     "retrieved_APIs": {
         "API_1": "Compressor.automatic_compression(input_model_path: str, output_dir: str, input_shapes: List[Dict[str, int]], framework: Framework = Framework.PYTORCH, compression_ratio: float = 0.5): Compress a model automatically based on the given compression ratio. As the compression ratio increases, you can get more lighter and faster compressed models, but with greater lost of accuracy. Therefore, it is necessary to find an appropriate ratio for your requirements. It might require a few trials and errors. The range of available values is as follows(0 < ratio <=1). Returns source model and compressed model information.\n\n\nParameters\n----------\ninput_model_path (str): The file path where the model is located.\noutput_dir (str): The local path to save the compressed model.\ninput_shapes (List[Dict[str, int]]): Input shapes of the model.\nframework (Framework, optional): The framework of the model.\ncompression_ratio (float, optional): The compression ratio for automatic compression. Defaults to 0.5.\n\n\nExamples\n----------\nfrom netspresso import NetsPresso\n\n\nnetspresso = NetsPresso(email='YOUR_EMAIL', password='YOUR_PASSWORD')\n\ncompressor = netspresso.compressor()\ncompressed_model = compressor.automatic_compression(\n    input_shapes=[{'batch': 1, 'channel': 3, 'dimension': [224, 224]}],\n    input_model_path='./examples/sample_models/graphmodule.pt',\n    output_dir='./outputs/compressed/pytorch_automatic_compression_1',\n    compression_ratio=0.5,\n)\n\nParameter Candidates\n--------\n```python\nclass Framework(str, Enum):\n    TENSORFLOW_KERAS = 'tensorflow_keras'\n    TENSORFLOW = 'saved_model'\n    PYTORCH = 'pytorch'\n    ONNX = 'onnx'\n    TENSORRT = 'tensorrt'\n    OPENVINO = 'openvino'\n    TENSORFLOW_LITE = 'tensorflow_lite' # TFLite\n    DRPAI = 'drpai'\n```\n",
@@ -24,7 +24,7 @@ RaCAV dataset is designed to evaluate answerability verification task for code g
 We define annotation criteria for determining whether a user query can be answered based on a specified API database. User queries usually consist of multiple requests. If all of the requests can be resolved using the library's APIs, the query is annotated as **answerable**. If only some of the requests can be resolved, it is annotated as **partially answerable**. If none of the requests can be resolved, it is annotated as **unanswerable**.
 
 ### Selected Libraries
-We selected *private libraries* that code language models have not been trained on. These *private libraries* ensure that the evaluation of answerability verification is independent of the prior knowledge of the code language models. Since code language models lack prior knowledge of the private libraries, they should heavily rely on retrieved APIs to generate responses for user queries. RaCAV includes the following 4 libraries:
+We selected *private libraries* that code language models have not been trained on. These *private libraries* ensure that the evaluation of answerability verification is independent of the prior knowledge of the code language models. Since code language models lack prior knowledge of the private libraries, they should heavily rely on retrieved APIs to generate responses for user queries. RaCGEval includes the following 4 libraries:
 
 - [**NetsPressoEval**](https://nota-netspresso.github.io/PyNetsPresso/description.html): Library for training, compressing, deploying, and benchmarking neural models on various hardware.
 - [**TorchDataEval**](https://github.com/microsoft/PyCodeGPT/tree/main/apicoder): Originated from TorchData, a beta library for modular data loading framework and efficient data pipelines.
@@ -41,7 +41,7 @@ Unanswerable and partially answerable samples correspond to cases where all or s
 - Query from out-of-database
 
 ### Dataset statistics
-The number of samples in the RaCAV dataset for each library and answerability type is shown in the table below. Every generated query is cross-checked by the 4 annotators.
+The number of samples in the RaCGEval dataset for each library and answerability type is shown in the table below. Every generated query is cross-checked by the 4 annotators.
 
 | Libraries | #Answerable | #Partially answerable | #Unanswerable | Canonical solution | Test code |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -53,16 +53,16 @@ The number of samples in the RaCAV dataset for each library and answerability ty
 
 ## Installation
 ```bash
-conda create -yn racav-env python=3.11
-conda activate racav-env
+conda create -yn RaCGEval-env python=3.11
+conda activate RaCGEval-env
 pip install -r requirements.txt
 ```
 
 ## Pre-trained models
-Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-adapter-RaCAV](https://huggingface.co/nota-ai/llama3-8b-adapter-RaCAV), and [gemma-7b-adapter-RaCAV](https://huggingface.co/nota-ai/gemma-7b-adapter-RaCAV).
+Pre-trained checkpoints (as an form of adapter) are available from [llama3-8b-adapter-RaCGEval](https://huggingface.co/nota-ai/llama3-8b-adapter-RaCGEval), and [gemma-7b-adapter-RaCGEval](https://huggingface.co/nota-ai/gemma-7b-adapter-RaCGEval).
 
 ## Inference
-Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and [Gemma](https://huggingface.co/google/gemma-1.1-2b-it) are required.
+Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and [Gemma](https://huggingface.co/google/gemma-1.1-7b-it) are required.
 You can get a response using `infer.py` with the example input in the code.
 
 ```bash

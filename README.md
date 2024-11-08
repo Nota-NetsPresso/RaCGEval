@@ -1,8 +1,8 @@
-# RaCGEval
+# RaCG-eval
 
 This repository contain the Retrieval-augmented Code Generability (RaCG) evaluation framework. Specifically, this repo includes benchmak dataset, pre-trained verification models checkpoints, inference and evaluation script.
 
-## RaCGEval dataset
+## RaCG dataset
 RaCGEval dataset is designed to evaluate answerability verification task for code generation task with RAG scenario. See the [paper]() for more details.
 
 ### Example
@@ -24,7 +24,7 @@ RaCGEval dataset is designed to evaluate answerability verification task for cod
 We define annotation criteria for determining whether a user query can be answered based on a specified API database. User queries usually consist of multiple requests. If all of the requests can be resolved using the library's APIs, the query is annotated as **answerable**. If only some of the requests can be resolved, it is annotated as **partially answerable**. If none of the requests can be resolved, it is annotated as **unanswerable**.
 
 ### Selected Libraries
-We selected *private libraries* that code language models have not been trained on. These *private libraries* ensure that the evaluation of answerability verification is independent of the prior knowledge of the code language models. Since code language models lack prior knowledge of the private libraries, they should heavily rely on retrieved APIs to generate responses for user queries. RaCGEval includes the following 4 libraries:
+We selected *private libraries* that code language models have not been trained on. These *private libraries* ensure that the evaluation of answerability verification is independent of the prior knowledge of the code language models. Since code language models lack prior knowledge of the private libraries, they should heavily rely on retrieved APIs to generate responses for user queries. RaCG includes the following 4 libraries:
 
 - [**NetsPressoEval**](https://nota-netspresso.github.io/PyNetsPresso/description.html): Library for training, compressing, deploying, and benchmarking neural models on various hardware.
 - [**TorchDataEval**](https://github.com/microsoft/PyCodeGPT/tree/main/apicoder): Originated from TorchData, a beta library for modular data loading framework and efficient data pipelines.
@@ -41,20 +41,20 @@ Unanswerable and partially answerable samples correspond to cases where all or s
 - Query from out-of-database
 
 ### Dataset statistics
-The number of samples in the RaCGEval dataset for each library and answerability type is shown in the table below. Every generated query is cross-checked by the 4 annotators.
+The number of samples in the RaCG dataset for each library and answerability type is shown in the table below. Every generated query is cross-checked by the 4 annotators.
 
-| Libraries | #Answerable | #Partially answerable | #Unanswerable | Canonical solution | Test code |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| NetsPressoEval | 70 | 49 | 121 | O | X |
-| TorchDataEval | 50 | 44 | 83 | O | O |
-| BeatNumEval | 85 | 89 | 148 | O | O |
-| MonkeyEval | 78 | 59 | 140 | O | O |
+| Libraries | #Answerable | #Partially answerable | #Unanswerable |
+|:---:|:---:|:---:|:---:|
+| NetsPressoEval | 70 | 49 | 121 |
+| TorchDataEval | 50 | 44 | 83 |
+| BeatNumEval | 85 | 89 | 148 |
+| MonkeyEval | 78 | 59 | 140 |
 
 
 ## Installation
 ```bash
-conda create -yn RaCGEval-env python=3.11
-conda activate RaCGEval-env
+conda create -yn racg-env python=3.11
+conda activate racg-env
 pip install -r requirements.txt
 ```
 
@@ -66,7 +66,29 @@ Access to [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) 
 You can get a response using `infer.py` with the example input in the code.
 
 ```bash
-python infer.py --model_name {gemma-7b, llama3-8b} --token {HF_token}
+python eval.py \
+    --model_path {directory containing lora adapter or model name} \
+    --device {device to use} \
+    --shots {zero, one, two} \
+    {--use_adapter}
+```
+
+### Example
+#### Use HF model
+```bash
+python eval.py \
+    --model_path google/gemma-1.1-7b-it \
+    --device cuda:0 \
+    --shots zero
+```
+
+#### Use adapter
+```bash
+python eval.py \
+    --model_path nota-ai/llama3-8b-adapter-RaCG \
+    --device cuda:0 \
+    --shots zero \
+    --use_adapter
 ```
 
 ## Benchmark
